@@ -1,0 +1,85 @@
+import java.util.*;
+class Solution
+{
+ public static void main(String args[])
+ {
+  int a[],n,lb,ub,i;
+  Scanner s=new Scanner(System.in);
+  System.out.println("enter size");
+  n=s.nextInt();
+  a=new int[n];
+  System.out.println("enter elements");
+  for(i=0;i<n;i++) 
+  {
+   a[i]=s.nextInt();
+  }
+  System.out.println("array is");
+  for(i=0;i<n;i++)
+  {
+   System.out.println(a[i]);
+  }
+  lb=0;
+  ub=n-1;
+  mergesort(a,lb,ub);
+  System.out.println("sorted array is");
+  for(i=0;i<n;i++)
+  {
+   System.out.println(a[i]);
+  }
+ }
+ static void mergesort(int a[],int lb,int ub)
+ {
+  int mid;
+  if(lb<ub)
+  { 
+   mid=(lb+ub)/2;
+   mergesort(a,lb,mid);
+   mergesort(a,mid+1,ub);
+   merge(a,lb,mid,ub);
+  }
+ }
+ static void  merge(int a[],int lb,int mid, int ub)
+ {
+  int i,j,k;
+  int b[]=new int[ub+1];
+  i=lb;
+  j=mid+1;
+  k=lb;
+  while(i<=mid && j<=ub)
+  {
+   if(a[i]<=a[j])
+   {
+    b[k]=a[i];
+    i++;
+   }
+   else
+   {
+    b[k]=a[j];
+    j++;
+   }
+   k++;
+  }
+  if(i>mid)
+  {
+   while(j<=ub)
+   {
+    b[k]=a[j];
+    j++;
+    k++;
+   }
+  }
+  if(j>ub)
+  {
+   while(i<=mid)
+   {
+    b[k]=a[i];
+    i++;
+    k++;
+   }
+  }
+  for(i=lb;i<=ub;i++)
+  {
+   a[i]=b[i];
+  }
+ }
+} 
